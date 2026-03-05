@@ -1,0 +1,12 @@
+#boxbed{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    
+}
+
+#boxbox{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
