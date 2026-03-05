@@ -1,6 +1,34 @@
+#gridmaster{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;    
+    flex-wrap: wrap;
+}
+
+#toppart{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#play{
+    padding: 5px;
+}
+
+#playInput{
+    margin: 5px;
+}
+
+#playstart{
+    margin: 5px;
+}
+
 #boxbed{
     display: flex;
     flex-direction: row;
+    align-content: center;
+    justify-content: center;
     flex-wrap: wrap;
     
 }

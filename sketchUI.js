@@ -1,93 +1,76 @@
 //box with button or div padding
 
-// const headTitle = document.createElement("h1");
-//         headTitle.id = "header"
-//         headTitle.textContent = "Etch-a-Sketch"
-//         headTitle.style.margin = "30px"
-//         headTitle.style.padding = "20px"
 const gridCont = document.querySelector("#gridmaster");
-// gridCont.appendChild(headTitle);
 
-const grdBtn = document.createElement("btn")
-    grdBtn.innerText = "button";
-gridCont.appendChild(grdBtn);
+    const headTitle = document.createElement("h1");
+            headTitle.id = "header"
+            headTitle.textContent = "Etch-a-Sketch"
+            headTitle.style.margin = "30px"
+            headTitle.style.padding = "20px"
+    gridCont.appendChild(headTitle);
+
+const siteHead = document.createElement("div")
+        siteHead.id = "toppart";
+        siteHead.style.margin = "5px";
+    gridCont.appendChild(siteHead);
+
+const playText = document.createElement("label")
+        playText.id = "play"
+        playText.innerText = " box count "
+    siteHead.appendChild(playText);
+
+const playInput = document.createElement("input")
+        playInput.id = "playInput";
+        playInput.type = "number";
+        playInput.maxLength = "3";
+        playInput.minLength = "1";
+        playInput.size = "2";
+        playInput.value = "0";
+        
+    siteHead.appendChild(playInput);
+
+   
+     
+const playStart = document.createElement("button")
+        playStart.id = "playstart";
+        playStart.innerText = "Etch-a-Sketch";
+        playStart.addEventListener("click", () => {  
+            
+            generateBox(getInput());
+          
+        })
+
+      //if no input=0, grid to default;
+      //on click 'resets' function, returns to default if no input
+    
+    siteHead.appendChild(playStart);
+
+            function getInput(){
+                let playBox = document.getElementById("playInput").value;
+                return playBox;
+            }
+
+
+
+const siteBody = document.createElement("div")
+        siteBody.id = "gridbody"
+    gridCont.appendChild(siteBody);
 
 const boxList = document.createElement("ul")
         boxList.id = "boxbed";
         boxList.class = "boxLayout"
+    siteBody.appendChild(boxList);
 
-    // const boxParts = boxList.appendChild(document.createElement("li"));
-    //     boxParts.innerText = "boxbox";
-    //     boxParts.style.padding = "30px";
-    //     boxParts.style.listStyleType = "none";
-        
-    // const boxParts2 = boxList.appendChild(document.createElement("li"));
-    //     boxParts2.innerText = "box";
-    //     boxParts2.style.padding = "30px";
-    //     boxParts2.style.listStyleType = "none";
-        
-
-gridCont.appendChild(boxList);
-
-        const boxOver = document.getElementById("boxbed")
-        
-              
+        const boxOver = document.getElementById("boxbed")              
                 boxOver.style.padding = "20px 30px 20px 30px"
-                boxOver.style.border = "solid black"        
-                // boxOver.addEventListener("mouseenter", () => {
-                    
-                //     function getRandomColor(){
-                //         const col =  "#"+Math.random().toString(16).slice(-6)
-                //         return col;
-                //     }
+                boxOver.style.border = "solid black"                             
+        siteBody.appendChild(boxOver);
+    
+boxCount = 15;
 
-                //         const randomColor = getRandomColor();
-
-                //     boxOver.style.backgroundColor = randomColor;
-                //     console.log("mouse enter", "color", randomColor)
-                // })
-
-                // boxOver.addEventListener("mouseleave", () => {
-                //     boxOver.style.backgroundColor = 'unset'
-                //     console.log("mouseleave")
-                // })
-                
-gridCont.appendChild(boxOver);
-
-    // function addBox(){
-
-    //     const boxOver = document.createElement("box");
-        
-    //             boxOver.innerText = ""
-    //               //boxarray.style.padding = '  
-    //             boxOver.style.padding = "20px 30px 20px 30px"
-    //             boxOver.style.border = "solid black"        
-    //             boxOver.addEventListener("mouseenter", () => {
-                    
-    //                 function getRandomColor(){
-    //                     const col =  "#"+Math.random().toString(16).slice(-6)
-    //                     return col;
-    //                 }
-
-    //                     const randomColor = getRandomColor();
-
-    //                 boxOver.style.backgroundColor = randomColor;
-    //                 console.log("mouse enter", "color", randomColor)
-    //             })
-
-    //             boxOver.addEventListener("mouseleave", () => {
-    //                 boxOver.style.backgroundColor = 'unset'
-    //                 console.log("mouseleave")
-    //             })
-                
-
-    //    return boxOver;
-
-    //  }
-
-let playBox = 10;
-
-for(i = 0; i <= playBox; i++){
+function generateBox(boxCount){
+    
+    for(i = 1; i <= boxCount; i++){
    
        const boxSub = document.createElement("li")
                 boxSub.id = "boxbox";
@@ -95,7 +78,7 @@ for(i = 0; i <= playBox; i++){
                 
 
             boxSub.style.padding = "20px 30px 20px 30px";
-            boxSub.style.margin = "10px";
+            boxSub.style.margin = "2px";
             boxSub.style.border = "thick solid black";
             boxSub.style.listStyleType = "none"
 
@@ -109,17 +92,21 @@ for(i = 0; i <= playBox; i++){
                         const randomColor = getRandomColor();
 
                     boxSub.style.backgroundColor = randomColor;
-                    console.log("mouse enter", "color", randomColor)
+                    //console.log("mouse enter", "color", randomColor)
                 })
 
             boxSub.addEventListener("mouseleave", () => {
                     boxSub.style.backgroundColor = 'unset'
-                    console.log("mouseleave")
+                    //console.log("mouseleave")
                 })
 
+                
             boxList.appendChild(boxSub)    
 
+    }
 }
+
+
 
 
 
