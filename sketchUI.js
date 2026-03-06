@@ -1,4 +1,3 @@
-//box with button or div padding
 
 const gridCont = document.querySelector("#gridmaster");
 
@@ -25,33 +24,32 @@ const playInput = document.createElement("input")
         playInput.maxLength = "3";
         playInput.minLength = "1";
         playInput.size = "2";
-        playInput.value = "0";
+        playInput.value = "";
         
     siteHead.appendChild(playInput);
 
    
      
-const playStart = document.createElement("button")
+const playStart = document.createElement("button") 
         playStart.id = "playstart";
         playStart.innerText = "Etch-a-Sketch";
-        playStart.addEventListener("click", () => {  
-            
-            generateBox(getInput());
-          
-        })
-
-      //if no input=0, grid to default;
-      //on click 'resets' function, returns to default if no input
+       
+       
     
     siteHead.appendChild(playStart);
 
             function getInput(){
                 let playBox = document.getElementById("playInput").value;
-                return playBox;
+
+                    if (playBox > 60){
+                        return alert("input limit 60");
+                    } else{
+                        return playBox * playBox;
+                    }
+              
             }
 
-
-
+            
 const siteBody = document.createElement("div")
         siteBody.id = "gridbody"
     gridCont.appendChild(siteBody);
@@ -62,49 +60,103 @@ const boxList = document.createElement("ul")
     siteBody.appendChild(boxList);
 
         const boxOver = document.getElementById("boxbed")              
-                boxOver.style.padding = "20px 30px 20px 30px"
+                boxOver.style.padding = "1px"
+                //boxOver.style.aspectRatio ="1/1"
+               
+                boxOver.style.maxHeight = "90%"
+                boxOver.style.Width = "90vw"
                 boxOver.style.border = "solid black"                             
         siteBody.appendChild(boxOver);
     
-boxCount = 15;
+generateBox(30*30);
 
-function generateBox(boxCount){
+let opcStep = .1;
+playStart.addEventListener("mousedown", () => {
+            
+            const maxSize = 100*100;
+            emptyGrid(maxSize);
+                                   
+        })
+       
+
+playStart.addEventListener("mouseup", () => {
+
+            const boxCount = getInput();
+            generateBox(boxCount),
+            console.log(boxCount);
+            playInput.value = ""
+            opcStep = 0;
+
+        })
+       
+
+
+function generateBox(gridSize){
     
-    for(i = 1; i <= boxCount; i++){
+    for(i = 1; i <= gridSize; i++){
    
        const boxSub = document.createElement("li")
                 boxSub.id = "boxbox";
-                boxSub.class = "boxFlex"
-                
+                boxSub.class = "boxFlex"   
 
-            boxSub.style.padding = "20px 30px 20px 30px";
-            boxSub.style.margin = "2px";
-            boxSub.style.border = "thick solid black";
+            boxSub.style.padding = "10px";
+            boxSub.style.maxHeight = "100vh"; 
+            boxSub.style.maxWidth = "100vh";
+            boxSub.style.margin = "1px";
+            boxSub.style.border = "thin solid black";
             boxSub.style.listStyleType = "none"
-
+        
             boxSub.addEventListener("mouseenter", () => {
                     
                     function getRandomColor(){
-                        const col =  "#"+Math.random().toString(16).slice(-6)
+                        const col = "#"+Math.random().toString(16).slice(-6)
                         return col;
                     }
+                        const randomColor = getRandomColor();   
 
-                        const randomColor = getRandomColor();
+                    
+                    opcStep += 0.1;
 
+                    if(opcStep >= 1){
+                        //console.log("maxopacity")
+                        opcStep = 0.1;
+                    }
+                   
                     boxSub.style.backgroundColor = randomColor;
-                    //console.log("mouse enter", "color", randomColor)
+                    boxSub.style.transitionDuration = '0s'
+                    boxSub.style.opacity = opcStep
+                    boxSub.style.transitionProperty = 0;
+                    //console.log(opcStep);                                
+                    //console.log("mouse enter")
+                   
                 })
-
+                             
             boxSub.addEventListener("mouseleave", () => {
                     boxSub.style.backgroundColor = 'unset'
+                    boxSub.style.transitionDuration = '9s'
+                    
+                   
                     //console.log("mouseleave")
                 })
-
-                
+            
+                            
             boxList.appendChild(boxSub)    
 
     }
+    
 }
+
+function emptyGrid(remover){
+       
+    for(i = 1; i <= remover; i++){
+       const emptyBox = document.querySelector("li")
+             
+        boxList.removeChild(emptyBox);
+
+    }
+
+}
+
 
 
 
